@@ -1,3 +1,5 @@
-import scapy
+from scapy.all import *
 
-# Implement your ICMP sender here
+
+icmp_packet = IP(dst="172.18.255.255", ttl=1) / ICMP()
+send(icmp_packet)

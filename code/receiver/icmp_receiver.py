@@ -1,3 +1,8 @@
-import scapy
+from scapy.all import *
 
-# Implement your ICMP receiver here
+def handle_packet(packet):
+    if packet.haslayer(ICMP):
+        packet.show() 
+
+
+sniff(filter="icmp", prn=handle_packet)
