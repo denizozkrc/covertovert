@@ -2,16 +2,16 @@
   "covert_channel_code": "Replace it with the [Code] of chosen covert channel type seen in ODTUClass.",
   "send": {
     "parameters": {
-      "min_msg_length": 50,
-      "max_msg_length": 100,
-      "bit_chunk_size": 4,
+      "min_msg_length": 2,
+      "max_msg_length": 2,
+      "bit_chunk_size": 2,
       "receiver_IP": "172.18.0.3",
       "log_file_name": "Example_UDPTimingInterarrivalChannelSender.log"
     }
   },
   "receive": {
     "parameters": {
-      "bit_chunk_size": 4,
+      "bit_chunk_size": 2,
       "sender_IP": "172.18.0.2",
       "log_file_name": "Example_UDPTimingInterarrivalChannelReceiver.log"
     }
