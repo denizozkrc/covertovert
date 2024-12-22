@@ -64,18 +64,20 @@ class MyCovertChannel(CovertChannelBase):
                 if message_char == "":
                     message_char = chunk
                 else:
-                    message_char = chunk + message_char
+                    message_char =  message_char + chunk
                 if mod_var == 8 // bit_chunk_size:
                     mod_var = 0
                     print("message_char: ", message_char, ", message_char type: ", type(message_char))
+                    print("message char in bits:",message_char)
                     message_char = self.convert_eight_bits_to_character(message_char)
+                    print("message char in char:",message_char)
                     message.append((message_char))
                     if message_char == '.':
                         stop_sniffing = True
                     else:
                         stop_sniffing = False
                     message_char = ""
-            print(f"Extracted data chunk: {chunk}")
+            print(f"Extracted data chunk: {chunk}, {stop_sniffing}")
 
         print("Listening for covert data...")
         sniff(filter="udp port 53", prn=process_packet, stop_filter=stop_fnc)
