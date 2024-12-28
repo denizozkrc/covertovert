@@ -15,6 +15,14 @@ class MyCovertChannel(CovertChannelBase):
         """
         pass
 
+    # min_msg_length: Minimum message length for the randomized DNS query. Default: 16
+    # max_msg_length: Maximum message length for the randomized DNS query. Default: 16
+    # bit_chunk_size: Bits to be sent per packet. Can be initialized to the values 1, 2, 4 and 8. Default: 2
+    # transaction_id_size: Bit size of the transaction id of DNS query. Fixed value: 16
+    # TrID_random_binary_min_size: Minimum string length for the initial randomized transaction id section. Regardless of length, first transaction_id_size bits will be used. Should be bigger than 2. Default value: 3
+    # TrID_random_binary_max_size: Maximum string length for the initial randomized transaction id section. Regardless of length, first transaction_id_size bits will be used. Should be bigger than TrID_random_binary_min_size. Default value: 3
+    # receiver_IP: IP of the receiver. Default: 172.18.0.3
+    # log_file_name: Name of the log file to be used. Default: Example_UDPTimingInterarrivalChannelSender.log
     def send(self, log_file_name, min_msg_length, max_msg_length, bit_chunk_size, receiver_IP, transaction_id_size, TrID_random_binary_min_size, TrID_random_binary_max_size):
         """
         - In this function, you expected to create a random message (using function/s in CovertChannelBase), and send it to the receiver container. Entire sending operations should be handled in this function.
@@ -36,6 +44,12 @@ class MyCovertChannel(CovertChannelBase):
         # print("Time taken to send the message: ", t1-t0)
         # print("bits per scond", 128/(t1-t0))
 
+    # bit_chunk_size: Bits to be sent per packet. Should be same value as the bit_chunk_size in sender. Can be initialized to the values 1, 2, 4 and 8. Default: 2
+    # mod_var_init: Initialization for the mod_var variable which checks if the bits received have formed a char yet. Fixed value: 0
+    # char_size: Char size. Fixed value: 8
+    # terminating_char: Terminating char. The randomizer in the code will always generate strings ending with ".". Depending on the terminating char, can be updated together with the randomizer. Default: "."
+    # sender_IP: IP of the receiver. Default: 172.18.0.2
+    # log_file_name: Name of the log file to be used. Default: Example_UDPTimingInterarrivalChannelReceiver.log
     def receive(self, sender_IP, log_file_name, bit_chunk_size, mod_var_init, char_size, terminating_char):
         """
         - In this function, you are expected to receive and decode the transferred message. Because there are many types of covert channels, the receiver implementation depends on the chosen covert channel type, and you may not need to use the functions in CovertChannelBase.
