@@ -59,6 +59,10 @@ If not, a random chunk from the transaction id is chosen and one of the bits is 
 
 
 ## Covert Channel Capacity
-// How did we measured the capacity
+In order to measure the capacity, we used the python `time` module. 
+- We called the `time()` function before sending the first packet and assigned its value to the variable t0. This function returns the time in seconds since epoch (the point where time begins).
+- We called the `time()` function after sending the last packet and assigned its value to the variable t1.
+- We calculated time passed between first and last packets by calculating (t1-t0). 
+- We divided 128 by this value and ended up with covert channel capacity in bits per second.
 
 **Measured capacity:** 17.84 bits per second
