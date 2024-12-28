@@ -1,6 +1,7 @@
 from CovertChannelBase import CovertChannelBase
 from scapy.all import IP, UDP, DNS, DNSQR, send, sniff
 import random
+# import time
 
 
 class MyCovertChannel(CovertChannelBase):
@@ -22,11 +23,18 @@ class MyCovertChannel(CovertChannelBase):
         message = self.generate_random_binary_message_with_logging(log_file_name, min_length=min_msg_length, max_length=max_msg_length)
         payload = self.generate_random_message()
         chunks = [message[i:i+bit_chunk_size] for i in range(0, len(message), bit_chunk_size)]
-        for chunk in chunks:
+        transaction_id_list = []
+        for i in range(len(chunks)):
+            transaction_id_list.append(self.encode(chunks[i], bit_chunk_size, transaction_id_size, TrID_random_binary_min_size, TrID_random_binary_max_size))
+        # t0 = time.time()
+        for transaction_id in transaction_id_list:
             # encode here
-            transaction_id = self.encode(chunk, bit_chunk_size, transaction_id_size, TrID_random_binary_min_size, TrID_random_binary_max_size)
             dns_request = IP(dst=receiver_IP)/UDP(dport=53)/DNS(id=transaction_id, qd=DNSQR(qname=payload))
             send(dns_request)
+        # t1 = time.time()
+        print("Message sent covertly!")
+        # print("Time taken to send the message: ", t1-t0)
+        # print("bits per scond", 128/(t1-t0))
 
     def receive(self, sender_IP, log_file_name, bit_chunk_size, mod_var_init, char_size, terminating_char):
         """
@@ -62,6 +70,7 @@ class MyCovertChannel(CovertChannelBase):
                         stop_sniffing = False
                     message_char = ""
 
+        print("Listening for covert data...")
         sniff(filter="udp port 53", prn=process_packet, stop_filter=stop_fnc)
 
         self.log_message("", log_file_name)

@@ -2,8 +2,8 @@
   "covert_channel_code": "CSC-PSV-DNS-TID",
   "send": {
     "parameters": {
-      "min_msg_length": 2,
-      "max_msg_length": 2,
+      "min_msg_length": 16,
+      "max_msg_length": 16,
       "bit_chunk_size": 2,
       "transaction_id_size": 16,
       "TrID_random_binary_min_size": 3,
