@@ -73,7 +73,7 @@ class MyCovertChannel(CovertChannelBase):
         message_char = ""
         mod_var = mod_var_init
         stop_sniffing = False
-        
+
         def stop_fnc(packet):
             nonlocal stop_sniffing
             return stop_sniffing
@@ -91,7 +91,7 @@ class MyCovertChannel(CovertChannelBase):
                 if mod_var == char_size // bit_chunk_size:
                     mod_var = mod_var_init
                     message_char = self.convert_eight_bits_to_character(message_char)
-                    message.append((message_char))
+                    message += message_char
                     if message_char == terminating_char:
                         stop_sniffing = True
                     else:
