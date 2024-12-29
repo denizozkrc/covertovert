@@ -1,8 +1,6 @@
 #  CSC-PSV-DNS-TID
 Covert Storage Channel that exploits Protocol Field Manipulation using Transaction ID field in DNS.
 
-## Purpose
-
 ## Sender
 
 ### Generating the Message
