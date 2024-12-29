@@ -65,4 +65,4 @@ In order to measure the capacity, we used the python `time` module.
 - We calculated time passed between first and last packets by calculating (t1-t0). 
 - We divided 128 by this value and ended up with covert channel capacity in bits per second.
 
-**Measured capacity:** 17.84 bits per second
+**Measured capacity:** 17.84 bits per second (for `bit_chunk_size`=2)
